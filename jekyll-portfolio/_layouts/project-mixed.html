@@ -1,0 +1,67 @@
+---
+layout: default
+---
+<article class="project project--mixed">
+  {% if page.cover %}
+  <div class="project-mixed__cover">
+    <div class="container">
+      <img src="{{ page.cover | relative_url }}" alt="{{ page.title }}" loading="eager">
+    </div>
+  </div>
+  {% endif %}
+
+  <div class="container container--narrow">
+    <header class="project-mixed__header">
+      <a href="{{ '/#work' | relative_url }}" class="project__back">← All work</a>
+      <span class="tag">{{ page.category }}</span>
+      <h1 class="project-mixed__title">{{ page.title }}</h1>
+
+      {% if page.tagline %}
+      <p class="project-mixed__tagline">{{ page.tagline }}</p>
+      {% endif %}
+
+      <div class="project__meta-bar">
+        {% if page.client %}<div class="project__meta-item"><span class="project__meta-label">Client</span><span>{{ page.client }}</span></div>{% endif %}
+        {% if page.role %}<div class="project__meta-item"><span class="project__meta-label">Role</span><span>{{ page.role }}</span></div>{% endif %}
+        {% if page.year %}<div class="project__meta-item"><span class="project__meta-label">Year</span><span>{{ page.year }}</span></div>{% endif %}
+        {% if page.link %}<a href="{{ page.link }}" target="_blank" rel="noopener" class="btn btn--pill btn--sm">Visit project →</a>{% endif %}
+      </div>
+    </header>
+
+    <div class="prose">
+      {{ content }}
+    </div>
+
+    <!-- Optional alternating image+text sections -->
+    {% if page.sections %}
+    <div class="project-mixed__sections">
+      {% for section in page.sections %}
+      <div class="project-mixed__section{% if section.image_right %} project-mixed__section--reversed{% endif %}">
+        {% if section.image %}
+        <div class="project-mixed__section-image">
+          <img src="{{ section.image | relative_url }}" alt="{{ section.alt | default: '' }}" loading="lazy">
+        </div>
+        {% endif %}
+        <div class="project-mixed__section-text">
+          {% if section.heading %}<h2>{{ section.heading }}</h2>{% endif %}
+          <p>{{ section.body }}</p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    {% if page.gallery %}
+    <div class="project-mixed__gallery">
+      {% for img in page.gallery %}
+      <figure>
+        <img src="{{ img.src | relative_url }}" alt="{{ img.alt | default: page.title }}" loading="lazy">
+        {% if img.caption %}<figcaption>{{ img.caption }}</figcaption>{% endif %}
+      </figure>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </div>
+
+  {% include project-nav.html %}
+</article>

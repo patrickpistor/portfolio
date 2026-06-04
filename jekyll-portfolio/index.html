@@ -1,0 +1,58 @@
+---
+layout: home
+title: Home
+---
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container">
+    <h1 class="hero__greeting">{{ site.hero_greeting }}</h1>
+    <p class="hero__intro">{{ site.hero_intro }}</p>
+    {% if site.hero_cta_label %}
+    <a href="{{ site.hero_cta_url | default: '#work' | relative_url }}" class="hero__cta">
+      {{ site.hero_cta_label }}
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+    </a>
+    {% endif %}
+  </div>
+</section>
+
+<!-- WORK GRID -->
+<section class="work" id="work">
+  <div class="container">
+    <p class="work__heading">Selected Work</p>
+    <div class="work__grid">
+      {% for project in site.data.projects %}
+        {% assign layout_hint = project.layout_hint | default: 'mixed' %}
+        <a
+          href="{{ project.url | relative_url }}"
+          class="project-card project-card--{{ layout_hint }}{% if project.featured %} project-card--featured{% endif %}"
+        >
+          {% if layout_hint != 'text' and project.cover %}
+          <div class="project-card__img-wrap">
+            <img
+              src="{{ project.cover }}"
+              alt="{{ project.title }}"
+              class="project-card__img"
+              loading="lazy"
+            >
+          </div>
+          {% elsif layout_hint == 'text' and project.cover == '' %}
+          <!-- Text card — no image -->
+          {% endif %}
+
+          <div class="project-card__body">
+            <span class="project-card__category tag{% if layout_hint == 'visual' %} tag--accent{% endif %}">
+              {{ project.category }}
+            </span>
+            <h2 class="project-card__title">{{ project.title }}</h2>
+            {% if layout_hint != 'visual' %}
+            <p class="project-card__desc">{{ project.description }}</p>
+            <span class="project-card__arrow">View project →</span>
+            {% endif %}
+          </div>
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>

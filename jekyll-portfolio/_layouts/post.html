@@ -1,0 +1,88 @@
+---
+layout: default
+---
+<article class="post">
+  <div class="container container--narrow">
+    <header class="post__header">
+      <a href="{{ '/blog/' | relative_url }}" class="post__back">← All posts</a>
+
+      {% if page.tags %}
+      <div class="post__tags">
+        {% for tag in page.tags %}
+        <span class="tag">{{ tag }}</span>
+        {% endfor %}
+      </div>
+      {% endif %}
+
+      <h1 class="post__title">{{ page.title }}</h1>
+
+      <div class="post__meta">
+        <time datetime="{{ page.date | date_to_xmlschema }}">
+          {{ page.date | date: "%B %-d, %Y" }}
+        </time>
+        <span class="post__meta-sep">·</span>
+        <span class="post__reading-time" id="readingTime">Reading…</span>
+      </div>
+    </header>
+
+    {% if page.cover %}
+    <div class="post__cover">
+      <img src="{{ page.cover | relative_url }}" alt="{{ page.title }}" loading="lazy">
+    </div>
+    {% endif %}
+
+    <div class="post__body prose" id="postBody">
+      {{ content }}
+    </div>
+
+    <!-- Related posts -->
+    {% assign related = site.posts | where_exp: "p", "p.url != page.url" %}
+    {% assign tagged = "" | split: "" %}
+    {% for tag in page.tags %}
+      {% assign matching = related | where_exp: "p", "p.tags contains tag" %}
+      {% assign tagged = tagged | concat: matching %}
+    {% endfor %}
+    {% assign related_posts = tagged | uniq | limit: 3 %}
+
+    {% if related_posts.size > 0 %}
+    <aside class="post__related">
+      <h2 class="post__related-heading">More posts</h2>
+      <ul class="post__related-list" role="list">
+        {% for rpost in related_posts %}
+        <li>
+          <a href="{{ rpost.url | relative_url }}">
+            <span class="post__related-title">{{ rpost.title }}</span>
+            <span class="post__related-date">{{ rpost.date | date: "%B %Y" }}</span>
+          </a>
+        </li>
+        {% endfor %}
+      </ul>
+    </aside>
+    {% endif %}
+  </div>
+</article>
+
+<!-- Reading progress bar -->
+<div class="reading-progress" id="readingProgress" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+
+<script>
+  // Reading time estimate
+  var body = document.getElementById('postBody');
+  if (body) {
+    var words = body.innerText.trim().split(/\s+/).length;
+    var minutes = Math.max(1, Math.round(words / 200));
+    document.getElementById('readingTime').textContent = minutes + ' min read';
+  }
+
+  // Reading progress bar
+  var bar = document.getElementById('readingProgress');
+  function updateProgress() {
+    var scrollTop = window.scrollY;
+    var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    var pct = docHeight > 0 ? Math.min(100, Math.round((scrollTop / docHeight) * 100)) : 0;
+    bar.style.width = pct + '%';
+    bar.setAttribute('aria-valuenow', pct);
+  }
+  window.addEventListener('scroll', updateProgress, { passive: true });
+  updateProgress();
+</script>

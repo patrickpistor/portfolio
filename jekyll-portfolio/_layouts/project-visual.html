@@ -1,0 +1,46 @@
+---
+layout: default
+---
+<article class="project project--visual">
+  <!-- Full-bleed hero with overlay text -->
+  <div class="project-visual__hero">
+    {% if page.cover %}
+    <img src="{{ page.cover | relative_url }}" alt="{{ page.title }}" class="project-visual__hero-img" loading="eager">
+    {% endif %}
+    <div class="project-visual__hero-overlay">
+      <div class="container">
+        <span class="project__category tag">{{ page.category }}</span>
+        <h1 class="project-visual__title">{{ page.title }}</h1>
+        {% if page.year %}<span class="project-visual__year">{{ page.year }}</span>{% endif %}
+      </div>
+    </div>
+  </div>
+
+  <div class="container container--narrow">
+    <!-- Project meta -->
+    <div class="project__meta-bar">
+      {% if page.client %}<div class="project__meta-item"><span class="project__meta-label">Client</span><span>{{ page.client }}</span></div>{% endif %}
+      {% if page.role %}<div class="project__meta-item"><span class="project__meta-label">Role</span><span>{{ page.role }}</span></div>{% endif %}
+      {% if page.year %}<div class="project__meta-item"><span class="project__meta-label">Year</span><span>{{ page.year }}</span></div>{% endif %}
+      {% if page.link %}<div class="project__meta-item"><a href="{{ page.link }}" target="_blank" rel="noopener" class="project__meta-link">Visit project →</a></div>{% endif %}
+    </div>
+
+    <div class="prose">
+      {{ content }}
+    </div>
+
+    <!-- Image gallery -->
+    {% if page.gallery %}
+    <div class="project-visual__gallery">
+      {% for img in page.gallery %}
+      <figure class="project-visual__gallery-item{% if img.full %} project-visual__gallery-item--full{% endif %}">
+        <img src="{{ img.src | relative_url }}" alt="{{ img.alt | default: page.title }}" loading="lazy">
+        {% if img.caption %}<figcaption>{{ img.caption }}</figcaption>{% endif %}
+      </figure>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </div>
+
+  {% include project-nav.html %}
+</article>

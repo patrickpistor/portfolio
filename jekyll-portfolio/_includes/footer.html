@@ -1,0 +1,44 @@
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer__top">
+      {% if site.data.footer.newsletter.enabled %}
+      <div class="footer__newsletter">
+        <p class="footer__newsletter-heading">{{ site.data.footer.newsletter.heading }}</p>
+        <p class="footer__newsletter-desc">{{ site.data.footer.newsletter.description }}</p>
+        <a href="{{ site.data.footer.newsletter.cta_url }}" class="btn btn--pill">
+          {{ site.data.footer.newsletter.cta_label }}
+        </a>
+      </div>
+      {% endif %}
+
+      <nav class="footer__columns" aria-label="Footer navigation">
+        {% for column in site.data.footer.columns %}
+        <div class="footer__column">
+          <p class="footer__column-heading">{{ column.heading }}</p>
+          <ul role="list">
+            {% for link in column.links %}
+            <li><a href="{{ link.url }}">{{ link.label }}</a></li>
+            {% endfor %}
+          </ul>
+        </div>
+        {% endfor %}
+      </nav>
+    </div>
+
+    <div class="footer__bottom">
+      <p class="footer__copyright">{{ site.data.footer.copyright }}</p>
+
+      {% if site.social_links %}
+      <ul class="footer__social" role="list">
+        {% for social in site.social_links %}
+        <li>
+          <a href="{{ social.url }}" target="_blank" rel="noopener noreferrer" aria-label="{{ social.label }}">
+            {% include icons/{{ social.icon }}.html %}
+          </a>
+        </li>
+        {% endfor %}
+      </ul>
+      {% endif %}
+    </div>
+  </div>
+</footer>

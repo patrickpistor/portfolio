@@ -1,0 +1,124 @@
+# ─────────────────────────────────────────────
+# SITE IDENTITY
+# ─────────────────────────────────────────────
+title: "Your Name"
+tagline: "Designer & Developer"
+description: "I build thoughtful digital products that live at the intersection of design and engineering."
+email: "hello@yoursite.com"
+url: "https://yourusername.github.io"
+baseurl: ""
+
+# ─────────────────────────────────────────────
+# BRANDING
+# ─────────────────────────────────────────────
+
+# Accent color — used for links, buttons, tags, and highlights.
+# Any valid hex value (include the #).
+accent_color: "#0052FF"
+
+# Font pairing — choose one: modern | editorial | mono | classic
+# modern    → Inter (clean, professional)
+# editorial → Playfair Display + Source Serif 4 (literary, warm)
+# mono      → Space Grotesk + JetBrains Mono (technical, distinct)
+# classic   → Lora + Open Sans (timeless, readable)
+font_pairing: "modern"
+
+# Logo / avatar (optional)
+# Path relative to the site root. Leave blank to show your name as text.
+logo: ""
+avatar: "/assets/images/avatar.jpg"
+
+# ─────────────────────────────────────────────
+# NAVIGATION
+# ─────────────────────────────────────────────
+nav_links:
+  - label: "Work"
+    url: "/#work"
+  - label: "Blog"
+    url: "/blog/"
+  - label: "About"
+    url: "/about/"
+
+contact_label: "Contact"
+contact_url: "mailto:hello@yoursite.com"
+
+# ─────────────────────────────────────────────
+# HOME PAGE
+# ─────────────────────────────────────────────
+hero_greeting: "Hi there!"
+hero_intro: "I'm a designer & developer crafting thoughtful digital experiences. Currently open to new opportunities."
+hero_cta_label: "View my work"
+hero_cta_url: "/#work"
+
+# ─────────────────────────────────────────────
+# ABOUT PAGE
+# ─────────────────────────────────────────────
+about_bio: |
+  I'm a designer and developer based in [City]. I've spent the last 5 years building products for startups and established brands — from brand identity systems to full-stack web applications.
+
+  I care deeply about the craft: clean code, considered typography, and interfaces that feel inevitable. When I'm not at the computer, I'm usually hiking, reading, or making espresso I can't stop thinking about.
+
+skills:
+  - UI/UX Design
+  - Brand Identity
+  - Front-End Development
+  - Motion Design
+  - Design Systems
+  - Typography
+
+social_links:
+  - label: "GitHub"
+    url: "https://github.com/yourusername"
+    icon: "github"
+  - label: "Twitter / X"
+    url: "https://x.com/yourusername"
+    icon: "x"
+  - label: "LinkedIn"
+    url: "https://linkedin.com/in/yourusername"
+    icon: "linkedin"
+  - label: "Dribbble"
+    url: "https://dribbble.com/yourusername"
+    icon: "dribbble"
+
+# ─────────────────────────────────────────────
+# JEKYLL SETTINGS
+# ─────────────────────────────────────────────
+markdown: kramdown
+highlighter: rouge
+
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+
+collections:
+  projects:
+    output: true
+    permalink: /work/:name/
+
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "projects"
+    values:
+      layout: "project-mixed"
+
+permalink: /blog/:year/:month/:day/:title/
+
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-sitemap
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor
+  - .bundle
+  - .sass-cache
+  - README.md

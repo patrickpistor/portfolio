@@ -1,0 +1,122 @@
+// ─────────────────────────────────────────────
+// ABOUT PAGE
+// ─────────────────────────────────────────────
+.about {
+  padding: var(--space-16) 0 var(--space-24);
+
+  &__header {
+    margin-bottom: var(--space-12);
+
+    h1 {
+      font-size: clamp(2.5rem, 7vw, 5rem);
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      line-height: 1.0;
+      margin-bottom: var(--space-6);
+    }
+
+    p {
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      color: var(--text-muted);
+      max-width: 540px;
+      line-height: 1.7;
+    }
+  }
+
+  &__body {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-12);
+
+    @media (min-width: 768px) {
+      grid-template-columns: 2fr 1fr;
+      align-items: start;
+    }
+  }
+
+  &__avatar {
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    order: -1;
+
+    @media (min-width: 768px) { order: 1; }
+
+    img { width: 100%; aspect-ratio: 4/5; object-fit: cover; }
+  }
+
+  &__bio {
+    .prose { font-size: 1.05rem; }
+  }
+
+  &__skills {
+    margin-top: var(--space-8);
+
+    &-heading {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-subtle);
+      margin-bottom: var(--space-4);
+    }
+
+    &-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-2);
+    }
+  }
+
+  &__social {
+    margin-top: var(--space-8);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+
+    a {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      transition: color var(--transition-fast);
+
+      svg { width: 18px; height: 18px; flex-shrink: 0; }
+      &:hover { color: var(--accent); }
+    }
+  }
+}
+
+// ─────────────────────────────────────────────
+// 404
+// ─────────────────────────────────────────────
+.error-page {
+  min-height: calc(100vh - var(--nav-height));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: var(--space-16);
+
+  &__code {
+    font-size: clamp(6rem, 20vw, 12rem);
+    font-weight: 900;
+    letter-spacing: -0.06em;
+    color: var(--bg-tertiary);
+    line-height: 1;
+  }
+
+  &__title {
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    font-weight: 700;
+    margin-bottom: var(--space-4);
+    margin-top: -var(--space-4);
+  }
+
+  &__desc {
+    color: var(--text-muted);
+    margin-bottom: var(--space-8);
+  }
+}

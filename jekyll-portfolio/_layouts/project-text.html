@@ -1,0 +1,29 @@
+---
+layout: default
+---
+<article class="project project--text">
+  <div class="container container--narrow">
+    <header class="project-text__header">
+      <a href="{{ '/#work' | relative_url }}" class="project__back">← All work</a>
+      <span class="tag">{{ page.category }}</span>
+      <h1 class="project-text__title">{{ page.title }}</h1>
+
+      {% if page.tagline %}
+      <p class="project-text__tagline">{{ page.tagline }}</p>
+      {% endif %}
+
+      <div class="project__meta-bar project__meta-bar--inline">
+        {% if page.client %}<div class="project__meta-item"><span class="project__meta-label">Client</span><span>{{ page.client }}</span></div>{% endif %}
+        {% if page.role %}<div class="project__meta-item"><span class="project__meta-label">Role</span><span>{{ page.role }}</span></div>{% endif %}
+        {% if page.year %}<div class="project__meta-item"><span class="project__meta-label">Year</span><span>{{ page.year }}</span></div>{% endif %}
+        {% if page.link %}<a href="{{ page.link }}" target="_blank" rel="noopener" class="btn btn--pill btn--sm">Visit project →</a>{% endif %}
+      </div>
+    </header>
+
+    <div class="prose project-text__body">
+      {{ content }}
+    </div>
+  </div>
+
+  {% include project-nav.html %}
+</article>

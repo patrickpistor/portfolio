@@ -1,0 +1,31 @@
+{% assign projects = site.projects | sort: 'date' %}
+{% for proj in projects %}
+  {% if proj.url == page.url %}
+    {% assign current_index = forloop.index0 %}
+  {% endif %}
+{% endfor %}
+
+{% if projects.size > 1 %}
+<nav class="project-pagination container">
+  {% if current_index > 0 %}
+    {% assign prev_proj = projects[current_index | minus: 1] %}
+    <a href="{{ prev_proj.url | relative_url }}" class="project-pagination__item project-pagination__item--prev">
+      <span class="project-pagination__label">← Previous</span>
+      <span class="project-pagination__title">{{ prev_proj.title }}</span>
+    </a>
+  {% else %}
+    <span></span>
+  {% endif %}
+
+  {% assign next_index = current_index | plus: 1 %}
+  {% if next_index < projects.size %}
+    {% assign next_proj = projects[next_index] %}
+    <a href="{{ next_proj.url | relative_url }}" class="project-pagination__item project-pagination__item--next">
+      <span class="project-pagination__label">Next →</span>
+      <span class="project-pagination__title">{{ next_proj.title }}</span>
+    </a>
+  {% else %}
+    <span></span>
+  {% endif %}
+</nav>
+{% endif %}

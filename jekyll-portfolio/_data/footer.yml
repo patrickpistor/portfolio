@@ -1,0 +1,45 @@
+# ─────────────────────────────────────────────
+# FOOTER CONFIGURATION
+# ─────────────────────────────────────────────
+# Add, remove, or reorder columns freely.
+# Each column has a heading and a list of links.
+# Remove a column by deleting its block.
+
+copyright: "© 2025 Your Name. All rights reserved."
+
+columns:
+  - heading: "Work"
+    links:
+      - label: "Selected Projects"
+        url: "/#work"
+      - label: "Case Studies"
+        url: "/#work"
+      - label: "Open Source"
+        url: "https://github.com/yourusername"
+
+  - heading: "Writing"
+    links:
+      - label: "Blog"
+        url: "/blog/"
+      - label: "RSS Feed"
+        url: "/feed.xml"
+
+  - heading: "Connect"
+    links:
+      - label: "Email"
+        url: "mailto:hello@yoursite.com"
+      - label: "GitHub"
+        url: "https://github.com/yourusername"
+      - label: "LinkedIn"
+        url: "https://linkedin.com/in/yourusername"
+      - label: "Twitter / X"
+        url: "https://x.com/yourusername"
+
+# Optional: show a newsletter signup blurb in the footer.
+# Set enabled: false to hide it entirely.
+newsletter:
+  enabled: true
+  heading: "Stay in touch"
+  description: "Occasional notes on design, development, and what I'm building."
+  cta_label: "Get in touch"
+  cta_url: "mailto:hello@yoursite.com"
