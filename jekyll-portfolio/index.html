@@ -23,12 +23,12 @@ title: Home
     <p class="work__heading">Selected Work</p>
     <div class="work__grid">
       {% for project in site.data.projects %}
-        {% assign layout_hint = project.layout_hint | default: 'mixed' %}
+        {% assign card_layout = project.layout | default: 'mixed' %}
         <a
           href="{{ project.url | relative_url }}"
-          class="project-card project-card--{{ layout_hint }}{% if project.featured %} project-card--featured{% endif %}"
+          class="project-card project-card--{{ card_layout }}{% if project.featured %} project-card--featured{% endif %}"
         >
-          {% if layout_hint != 'text' and project.cover %}
+          {% if card_layout != 'text' and project.cover != '' and project.cover %}
           <div class="project-card__img-wrap">
             <img
               src="{{ project.cover }}"
@@ -37,16 +37,14 @@ title: Home
               loading="lazy"
             >
           </div>
-          {% elsif layout_hint == 'text' and project.cover == '' %}
-          <!-- Text card — no image -->
           {% endif %}
 
           <div class="project-card__body">
-            <span class="project-card__category tag{% if layout_hint == 'visual' %} tag--accent{% endif %}">
+            <span class="project-card__category tag{% if card_layout == 'visual' %} tag--accent{% endif %}">
               {{ project.category }}
             </span>
             <h2 class="project-card__title">{{ project.title }}</h2>
-            {% if layout_hint != 'visual' %}
+            {% if card_layout != 'visual' %}
             <p class="project-card__desc">{{ project.description }}</p>
             <span class="project-card__arrow">View project →</span>
             {% endif %}

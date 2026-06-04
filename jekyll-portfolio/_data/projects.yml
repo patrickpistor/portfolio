@@ -7,21 +7,25 @@
 #   title       — project name
 #   category    — short tag shown on the card (e.g. "Brand Identity", "Web App")
 #   description — 1–2 sentence summary shown on the card
-#   cover       — path to cover image (relative to site root)
+#   cover       — path to cover image (relative to site root, or a full URL)
 #   url         — where clicking the card goes (internal page or external link)
-#   layout_hint — visual | text | mixed  (controls card style on the home grid)
-#                 visual: image-dominant card, thin overlay text
-#                 text:   text-dominant card, muted background, no image
-#                 mixed:  standard card with image above and text below (default)
-#   featured    — true to show larger on the home grid (first featured item)
-#   year        — displayed on hover / project page
+#   layout      — visual | text | mixed  (controls BOTH the card style on the home
+#                 grid AND the default layout for the project detail page)
+#                   visual: full-bleed cover image, text overlay on card; use
+#                           project-visual layout for the detail page
+#                   text:   no image on card, bold typography dominant; use
+#                           project-text layout for the detail page
+#                   mixed:  standard image-above / text-below card (default); use
+#                           project-mixed layout for the detail page
+#   featured    — true to show this card larger on the home grid
+#   year        — displayed in project metadata
 
 - title: "QParcel"
   category: "Brand & Web"
   description: "End-to-end rebrand and marketing site for a fast-growing parcel delivery startup."
   cover: "https://picsum.photos/seed/qparcel/1200/800"
   url: "/work/brand-identity/"
-  layout_hint: "visual"
+  layout: "visual"
   featured: true
   year: "2024"
 
@@ -30,7 +34,7 @@
   description: "A collaborative design tool for landscape architects built with real-time multiplayer editing."
   cover: "https://picsum.photos/seed/terrain/1200/800"
   url: "/work/product-landing/"
-  layout_hint: "mixed"
+  layout: "mixed"
   featured: false
   year: "2024"
 
@@ -39,7 +43,7 @@
   description: "An interactive type specimen exploring variable fonts and their expressive range."
   cover: ""
   url: "/work/type-specimen/"
-  layout_hint: "text"
+  layout: "text"
   featured: false
   year: "2023"
 
@@ -48,6 +52,6 @@
   description: "Art direction and layout system for an independent design and culture publication."
   cover: "https://picsum.photos/seed/luminary/1200/800"
   url: "/work/editorial-magazine/"
-  layout_hint: "mixed"
+  layout: "mixed"
   featured: false
   year: "2023"
