@@ -34,7 +34,8 @@ function jekyllLivereloadPlugin(): Plugin {
 
 export default defineConfig({
   base: "/",
-  publicDir: JEKYLL_SITE,
+  root: JEKYLL_SITE,
+  publicDir: false,
   appType: "mpa",
   plugins: [jekyllLivereloadPlugin()],
   server: {
