@@ -227,42 +227,61 @@
 }
 
 // ─────────────────────────────────────────────
-// PROJECT PAGINATION
+// PROSE WIDTH — readable column within wide container
 // ─────────────────────────────────────────────
-.project-pagination {
-  display: flex;
-  justify-content: space-between;
-  align-items: stretch;
-  gap: var(--space-4);
-  padding: var(--space-12) 0 var(--space-8);
-  border-top: 1px solid var(--border);
+.project .prose {
+  max-width: 680px;
+}
 
-  &__item {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-1);
-    max-width: 45%;
-    padding: var(--space-4) var(--space-5);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-md);
-    transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+// ─────────────────────────────────────────────
+// LIGHTBOX
+// ─────────────────────────────────────────────
+img.js-lightbox {
+  cursor: zoom-in;
+}
 
-    &:hover { border-color: var(--text); box-shadow: var(--shadow-sm); }
+.lightbox {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.92);
+  z-index: 9999;
+  align-items: center;
+  justify-content: center;
+  cursor: zoom-out;
+  padding: var(--space-8);
 
-    &--next { text-align: right; margin-left: auto; }
+  &.is-open { display: flex; }
+
+  &__img {
+    max-width: 92vw;
+    max-height: 90vh;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    border-radius: var(--radius-sm);
+    box-shadow: 0 32px 96px rgba(0, 0, 0, 0.6);
+    cursor: default;
+    animation: lightbox-in 0.18s ease;
   }
 
-  &__label {
-    font-size: 0.8rem;
-    font-weight: 700;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    color: var(--text-subtle);
+  &__close {
+    position: absolute;
+    top: var(--space-5);
+    right: var(--space-6);
+    font-size: 1.5rem;
+    line-height: 1;
+    color: rgba(255, 255, 255, 0.7);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: var(--space-2) var(--space-3);
+    transition: color var(--transition-fast);
+    &:hover { color: #fff; }
   }
+}
 
-  &__title {
-    font-size: 0.95rem;
-    font-weight: 600;
-    color: var(--text);
-  }
+@keyframes lightbox-in {
+  from { opacity: 0; transform: scale(0.95); }
+  to   { opacity: 1; transform: scale(1); }
 }

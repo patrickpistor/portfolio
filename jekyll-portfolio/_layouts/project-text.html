@@ -2,7 +2,7 @@
 layout: default
 ---
 <article class="project project--text">
-  <div class="container container--narrow">
+  <div class="container">
     <header class="project-text__header">
       <a href="{{ '/#work' | relative_url }}" class="project__back">← All work</a>
       <span class="tag">{{ page.category }}</span>
@@ -25,5 +25,5 @@ layout: default
     </div>
   </div>
 
-  {% include project-nav.html %}
+  {% include lightbox.html %}
 </article>
