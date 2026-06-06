@@ -43,7 +43,7 @@
 }
 
 // ─────────────────────────────────────────────
-// HOME — WORK GRID
+// HOME — WORK SECTION
 // ─────────────────────────────────────────────
 .work {
   padding: var(--space-12) 0 var(--space-24);
@@ -54,7 +54,7 @@
     letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--text-subtle);
-    margin-bottom: var(--space-8);
+    margin-bottom: var(--space-6);
   }
 
   &__grid {
@@ -62,111 +62,210 @@
     grid-template-columns: 1fr;
     gap: var(--space-4);
 
-    @media (min-width: 640px) {
-      grid-template-columns: repeat(2, 1fr);
-    }
-    @media (min-width: 1024px) {
-      grid-template-columns: repeat(3, 1fr);
-      // Featured item spans 2 cols
-      .project-card--featured {
-        grid-column: span 2;
-      }
+    @media (min-width: 768px) {
+      grid-template-columns: repeat(12, 1fr);
     }
   }
 }
 
 // ─────────────────────────────────────────────
-// PROJECT CARD
+// PROJECT CARD — shared base
 // ─────────────────────────────────────────────
 .project-card {
   display: block;
   position: relative;
   border-radius: var(--radius-lg);
   overflow: hidden;
-  background: var(--bg-secondary);
-  border: 1px solid var(--border);
-  transition: transform var(--transition-base), box-shadow var(--transition-base);
+  background: var(--bg-tertiary);
+  cursor: pointer;
+  grid-column: span 1;
 
-  &:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-lg);
-    .project-card__img { transform: scale(1.03); }
-  }
-
-  // Visual layout — image dominant
-  &--visual {
-    .project-card__body { position: absolute; inset: auto 0 0; padding: var(--space-4) var(--space-6); background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 100%); }
-    .project-card__title { color: #fff; font-size: 1.2rem; }
-    .project-card__desc  { display: none; }
-    .project-card__category { background: rgba(255,255,255,0.15); color: #fff; border-color: rgba(255,255,255,0.2); }
-    .project-card__img-wrap { aspect-ratio: 4/3; }
-  }
-
-  // Text layout — no image, typographic card
-  &--text {
-    .project-card__img-wrap { display: none; }
-    .project-card__body { padding: var(--space-8); min-height: 240px; display: flex; flex-direction: column; justify-content: space-between; }
-    .project-card__title { font-size: clamp(1.3rem, 3vw, 1.8rem); }
-    background: var(--bg-tertiary);
-  }
-
-  // Mixed — standard image + text below
-  &--mixed {
-    .project-card__body { padding: var(--space-5); }
-    .project-card__img-wrap { aspect-ratio: 16/10; }
-  }
-
-  &__img-wrap {
-    width: 100%;
-    overflow: hidden;
-    background: var(--bg-tertiary);
-  }
-
+  // Image fills the card
   &__img {
+    position: absolute;
+    inset: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
     transition: transform var(--transition-slow);
+    will-change: transform;
   }
 
-  &__body {
-    position: relative;
+  // Gradient overlay — always present so text is readable
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      160deg,
+      transparent 30%,
+      rgba(0, 0, 0, 0.15) 55%,
+      rgba(0, 0, 0, 0.75) 100%
+    );
     z-index: 1;
+    transition: opacity var(--transition-base);
+  }
+
+  // Text block anchored to bottom-left
+  &__body {
+    position: absolute;
+    inset: auto 0 0;
+    padding: var(--space-6);
+    z-index: 2;
   }
 
   &__category {
+    display: inline-block;
     margin-bottom: var(--space-3);
+    padding: 0.25em 0.75em;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.9);
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: var(--radius-full);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
   }
 
+  &__text { display: flex; flex-direction: column; gap: var(--space-1); }
+
   &__title {
-    font-size: 1.1rem;
-    font-weight: 700;
-    letter-spacing: -0.01em;
-    margin-bottom: var(--space-2);
-    color: var(--text);
+    font-family: var(--font-heading);
+    font-size: 1.2rem;
+    font-weight: 800;
+    letter-spacing: -0.025em;
+    color: #fff;
+    line-height: 1.2;
   }
 
   &__desc {
-    font-size: 0.9rem;
-    color: var(--text-muted);
-    line-height: 1.6;
-    margin-bottom: var(--space-4);
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.65);
+    line-height: 1.5;
+    margin: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
 
-  &__arrow {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--space-1);
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: var(--accent);
-    opacity: 0;
-    transform: translateX(-4px);
-    transition: opacity var(--transition-fast), transform var(--transition-fast);
+  // Hover — lift + image zoom
+  &:hover {
+    .project-card__img { transform: scale(1.04); }
+    &::after { opacity: 0.9; }
   }
 
-  &:hover &__arrow {
-    opacity: 1;
-    transform: translateX(0);
+  // No-image cards — use a rich dark bg + colored text
+  &--no-image {
+    background: var(--bg-secondary);
+    border: 1.5px solid var(--border);
+
+    &::after { display: none; }
+
+    .project-card__category {
+      color: var(--accent);
+      background: var(--accent-10);
+      border-color: transparent;
+    }
+    .project-card__title { color: var(--text); }
+    .project-card__desc  { color: var(--text-muted); }
+
+    // Shift text to center of card
+    .project-card__body {
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+  }
+}
+
+// ─────────────────────────────────────────────
+// HERO CARD — first project, full width, tall
+// ─────────────────────────────────────────────
+.project-card--hero {
+  aspect-ratio: 16 / 7;
+  min-height: 300px;
+  grid-column: 1 / -1;
+
+  @media (min-width: 768px) {
+    aspect-ratio: auto;
+    height: 540px;
+  }
+
+  .project-card__body {
+    padding: var(--space-8);
+
+    @media (min-width: 1024px) { padding: var(--space-10); }
+  }
+
+  .project-card__title {
+    font-size: clamp(1.6rem, 3.5vw, 2.6rem);
+  }
+
+  .project-card__desc {
+    font-size: 1rem;
+    -webkit-line-clamp: 3;
+    max-width: 520px;
+  }
+
+  // Stronger gradient so large text reads on any image
+  &::after {
+    background: linear-gradient(
+      to bottom,
+      transparent 25%,
+      rgba(0, 0, 0, 0.1) 50%,
+      rgba(0, 0, 0, 0.85) 100%
+    );
+  }
+
+  &.project-card--no-image {
+    .project-card__body {
+      inset: 0;
+      justify-content: flex-end;
+    }
+  }
+}
+
+// ─────────────────────────────────────────────
+// GRID CARDS — remaining projects, asymmetric layout
+// Pairs alternate: 7+5 cols → 5+7 cols → repeat
+// nth-child counts from parent (.work__grid):
+//   child 1 = hero
+//   child 2 = 1st grid card  → even → 7 cols
+//   child 3 = 2nd grid card  → odd  → 5 cols  [pair 1: 7+5]
+//   child 4 = 3rd grid card  → even → 5 cols
+//   child 5 = 4th grid card  → odd  → 7 cols  [pair 2: 5+7]  ← wait, let's use 4n
+// ─────────────────────────────────────────────
+.project-card--grid {
+  aspect-ratio: 4 / 3;
+  grid-column: span 1;
+
+  @media (min-width: 768px) {
+    aspect-ratio: auto;
+    height: 380px;
+    grid-column: span 6; // default fallback
+  }
+
+  // Alternating asymmetric columns (desktop only)
+  // Pattern: 7, 5, 5, 7, 7, 5, 5, 7...
+  // children 2,6,10... and 5,9,13... → 7 cols
+  // children 3,7,11... and 4,8,12... → 5 cols
+  @media (min-width: 768px) {
+    &:nth-child(4n+2) { grid-column: span 7; }
+    &:nth-child(4n+3) { grid-column: span 5; }
+    &:nth-child(4n+4) { grid-column: span 5; }
+    &:nth-child(4n+1) { grid-column: span 7; } // positions 5,9,13... (hero is pos 1 but has --hero class)
+  }
+
+  // Slightly taller for the wider 7-col cards
+  @media (min-width: 768px) {
+    &:nth-child(4n+2),
+    &:nth-child(4n+1) {
+      height: 400px;
+    }
   }
 }

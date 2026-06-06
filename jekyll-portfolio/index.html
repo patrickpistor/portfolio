@@ -23,33 +23,26 @@ title: Home
     <p class="work__heading">Selected Work</p>
     <div class="work__grid">
       {% for project in site.data.projects %}
-        {% assign card_layout = project.layout | default: 'mixed' %}
-        <a
-          href="{{ project.url | relative_url }}"
-          class="project-card project-card--{{ card_layout }}{% if project.featured %} project-card--featured{% endif %}"
+      <a
+        href="{{ project.url | relative_url }}"
+        class="project-card{% if forloop.first %} project-card--hero{% else %} project-card--grid{% endif %}{% unless project.cover and project.cover != '' %} project-card--no-image{% endunless %}"
+      >
+        {% if project.cover and project.cover != '' %}
+        <img
+          src="{{ project.cover }}"
+          alt="{{ project.title }}"
+          class="project-card__img"
+          loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
         >
-          {% if card_layout != 'text' and project.cover != '' and project.cover %}
-          <div class="project-card__img-wrap">
-            <img
-              src="{{ project.cover }}"
-              alt="{{ project.title }}"
-              class="project-card__img"
-              loading="lazy"
-            >
-          </div>
-          {% endif %}
-
-          <div class="project-card__body">
-            <span class="project-card__category tag{% if card_layout == 'visual' %} tag--accent{% endif %}">
-              {{ project.category }}
-            </span>
+        {% endif %}
+        <div class="project-card__body">
+          <span class="project-card__category">{{ project.category }}</span>
+          <div class="project-card__text">
             <h2 class="project-card__title">{{ project.title }}</h2>
-            {% if card_layout != 'visual' %}
             <p class="project-card__desc">{{ project.description }}</p>
-            <span class="project-card__arrow">View project →</span>
-            {% endif %}
           </div>
-        </a>
+        </div>
+      </a>
       {% endfor %}
     </div>
   </div>
