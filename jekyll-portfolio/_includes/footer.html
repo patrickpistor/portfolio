@@ -110,27 +110,6 @@
       </div>
       {% endif %}
 
-      <nav class="footer__nav" aria-label="Quick links">
-        <p class="footer__nav-heading">Navigate</p>
-        <ul role="list">
-          {% for link in site.nav_links %}
-          <li>
-            {% if link.url contains 'http' %}
-            <a href="{{ link.url }}" target="_blank" rel="noopener">{{ link.label }}</a>
-            {% else %}
-            <a href="{{ link.url | relative_url }}">{{ link.label }}</a>
-            {% endif %}
-          </li>
-          {% endfor %}
-          {% if site.substack.username and site.substack.username != "" %}
-          <li><a href="https://{{ site.substack.username }}.substack.com" target="_blank" rel="noopener">{{ site.substack.nav_label | default: "Writing" }}</a></li>
-          {% endif %}
-          {% if site.email %}
-          <li><button class="footer__nav-email js-copy-email" data-email="{{ site.email }}">Get in touch ↗</button></li>
-          {% endif %}
-        </ul>
-      </nav>
-
     </div>
 
     <div class="footer__bottom">

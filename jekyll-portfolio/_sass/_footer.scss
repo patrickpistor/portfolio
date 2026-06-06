@@ -77,38 +77,6 @@
   white-space: nowrap;
 }
 
-// Quick nav column
-.footer__nav {
-  &-heading {
-    font-size: 0.75rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--text-subtle);
-    margin-bottom: var(--space-4);
-  }
-
-  ul {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-3);
-  }
-
-  a, &-email {
-    font-size: 0.9rem;
-    color: var(--text-muted);
-    transition: color var(--transition-fast);
-    &:hover { color: var(--text); }
-  }
-
-  &-email {
-    background: none;
-    border: none;
-    padding: 0;
-    cursor: pointer;
-    font-family: var(--font-body);
-  }
-}
 
 .footer__columns {
   display: flex;

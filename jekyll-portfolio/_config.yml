@@ -34,12 +34,12 @@ avatar: "/assets/images/avatar.jpg"
 nav_links:
   - label: "Work"
     url: "/#work"
+  - label: "Writing"
+    url: "https://substack.com"   # replace with your Substack URL, e.g. https://yourname.substack.com
   - label: "About"
     url: "/about/"
   - label: "Resume"
     url: "/assets/resume.pdf"
-# Writing / Substack link is added automatically to the nav when
-# substack.username is set below. Label is controlled by substack.nav_label.
 
 contact_label: "Contact"
 contact_url: "mailto:hello@yoursite.com"
