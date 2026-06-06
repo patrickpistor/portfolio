@@ -4,8 +4,10 @@
 
       {% if site.data.footer.newsletter.enabled %}
       <div class="footer__newsletter">
-        <p class="footer__newsletter-heading">{{ site.data.footer.newsletter.heading }}</p>
-        <p class="footer__newsletter-desc">{{ site.data.footer.newsletter.description }}</p>
+        <div class="footer__newsletter-copy">
+          <p class="footer__newsletter-heading">{{ site.data.footer.newsletter.heading }}</p>
+          <p class="footer__newsletter-desc">{{ site.data.footer.newsletter.description }}</p>
+        </div>
 
         {% if site.substack.username and site.substack.username != "" %}
         {% assign ss_url = "https://" | append: site.substack.username | append: ".substack.com" %}

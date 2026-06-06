@@ -19,7 +19,21 @@
 }
 
 .footer__newsletter {
-  max-width: 320px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+  width: 100%;
+
+  @media (min-width: 640px) {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: var(--space-16);
+  }
+
+  &-copy {
+    flex: 1 1 0;
+    min-width: 0;
+  }
 
   &-heading {
     font-family: var(--font-heading);
@@ -32,15 +46,21 @@
     font-size: 0.9rem;
     color: var(--text-muted);
     line-height: 1.6;
-    margin-bottom: var(--space-5);
+    margin: 0;
   }
 }
 
-// Newsletter signup form
+// Newsletter signup form — sits in the right column
 .footer__signup-form {
+  flex: 0 0 280px;
   display: flex;
   flex-direction: column;
-  gap: var(--space-2);
+  gap: var(--space-3);
+
+  @media (max-width: 639px) {
+    flex: none;
+    width: 100%;
+  }
 }
 
 .footer__signup-label {
@@ -52,13 +72,12 @@
 
 .footer__signup-row {
   display: flex;
-  gap: var(--space-2);
-  align-items: stretch;
+  flex-direction: column;
+  gap: var(--space-3);
 }
 
 .footer__signup-input {
-  flex: 1;
-  min-width: 0;
+  width: 100%;
   padding: 0.6em 0.9em;
   font-size: 0.9rem;
   font-family: var(--font-body);
@@ -74,7 +93,7 @@
 }
 
 .footer__signup-btn {
-  flex-shrink: 0;
+  align-self: flex-start;
   white-space: nowrap;
 }
 
