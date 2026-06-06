@@ -153,11 +153,10 @@
     overflow: hidden;
   }
 
-  // Hover — lift card + zoom image
+  // Hover — lift card only, no image zoom
   &:hover {
     transform: translateY(-4px);
     box-shadow: var(--shadow-lg);
-    .project-card__img { transform: scale(1.04); }
     &::after { opacity: 0.85; }
   }
 
@@ -174,18 +173,18 @@
 
   &__icon-glow {
     position: absolute;
-    width: 140px;
-    height: 140px;
+    width: 260px;
+    height: 260px;
     border-radius: 50%;
-    background: radial-gradient(circle, var(--accent) 0%, transparent 70%);
-    opacity: 0.18;
-    filter: blur(24px);
+    background: radial-gradient(circle, var(--accent) 0%, transparent 65%);
+    opacity: 0.08;
+    filter: blur(40px);
     pointer-events: none;
   }
 
   &__icon {
-    width: 44px;
-    height: 44px;
+    width: 64px;
+    height: 64px;
     color: var(--accent);
     stroke-width: 1.25;
     position: relative;
@@ -194,7 +193,7 @@
   }
 
   &:hover &__icon {
-    transform: scale(1.1);
+    transform: scale(1.08);
   }
 }
 
