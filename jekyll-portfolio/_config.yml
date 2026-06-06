@@ -38,6 +38,8 @@ nav_links:
     url: "/blog/"
   - label: "About"
     url: "/about/"
+  - label: "Resume"
+    url: "/assets/resume.pdf"
 
 contact_label: "Contact"
 contact_url: "mailto:hello@yoursite.com"
@@ -66,6 +68,10 @@ skills:
   - Design Systems
   - Typography
 
+# Social links — shown as icons in the footer.
+# Add, remove, or reorder entries freely.
+# Available icons: github, x, linkedin, dribbble, instagram, behance, codepen, youtube
+# To add a new one, just add an entry with the matching icon name and your URL.
 social_links:
   - label: "GitHub"
     url: "https://github.com/yourusername"
@@ -79,6 +85,18 @@ social_links:
   - label: "Dribbble"
     url: "https://dribbble.com/yourusername"
     icon: "dribbble"
+  # - label: "CodePen"
+  #   url: "https://codepen.io/yourusername"
+  #   icon: "codepen"
+  # - label: "Instagram"
+  #   url: "https://instagram.com/yourusername"
+  #   icon: "instagram"
+  # - label: "Behance"
+  #   url: "https://behance.net/yourusername"
+  #   icon: "behance"
+  # - label: "YouTube"
+  #   url: "https://youtube.com/@yourusername"
+  #   icon: "youtube"
 
 # ─────────────────────────────────────────────
 # SUBSTACK (optional)

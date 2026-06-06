@@ -8,7 +8,6 @@
         <p class="footer__newsletter-desc">{{ site.data.footer.newsletter.description }}</p>
 
         {% if site.substack.username and site.substack.username != "" %}
-        <!-- Substack inline subscribe -->
         {% assign ss_url = "https://" | append: site.substack.username | append: ".substack.com" %}
         <form class="footer__signup-form" id="substackForm" novalidate>
           {% assign nl = site.data.footer.newsletter %}
@@ -105,32 +104,18 @@
             </div>
           </form>
           {% endif %}
-        {% else %}
-        <a href="mailto:{{ nl.form_mailto }}" class="btn btn--pill">
-          {{ nl.submit_label | default: 'Get in touch' }}
-        </a>
         {% endif %}
 
         {% endif %}
       </div>
       {% endif %}
 
-      <nav class="footer__columns" aria-label="Footer navigation">
-        {% for column in site.data.footer.columns %}
-        <div class="footer__column">
-          <p class="footer__column-heading">{{ column.heading }}</p>
-          <ul role="list">
-            {% for link in column.links %}
-            <li><a href="{{ link.url }}">{{ link.label }}</a></li>
-            {% endfor %}
-          </ul>
-        </div>
-        {% endfor %}
-      </nav>
     </div>
 
     <div class="footer__bottom">
-      <p class="footer__copyright">{{ site.data.footer.copyright }}</p>
+      <p class="footer__copyright">
+        &copy; <span id="footer-year"></span> {{ site.title }}
+      </p>
 
       {% if site.social_links %}
       <ul class="footer__social" role="list">
@@ -146,3 +131,7 @@
     </div>
   </div>
 </footer>
+
+<script>
+  document.getElementById('footer-year').textContent = new Date().getFullYear();
+</script>
