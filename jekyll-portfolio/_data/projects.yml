@@ -8,50 +8,45 @@
 #   category    — short tag shown on the card (e.g. "Brand Identity", "Web App")
 #   description — 1–2 sentence summary shown on the card
 #   cover       — path to cover image (relative to site root, or a full URL)
+#               — leave blank to show an icon card instead
+#   icon        — Lucide icon name for cards without a cover image
+#               — browse icons at lucide.dev (use the kebab-case name, e.g. "type", "code-2", "layers")
 #   url         — where clicking the card goes (internal page or external link)
-#   layout      — visual | text | mixed  (controls BOTH the card style on the home
-#                 grid AND the default layout for the project detail page)
-#                   visual: full-bleed cover image, text overlay on card; use
-#                           project-visual layout for the detail page
-#                   text:   no image on card, bold typography dominant; use
-#                           project-text layout for the detail page
-#                   mixed:  standard image-above / text-below card (default); use
-#                           project-mixed layout for the detail page
-#   featured    — true to show this card larger on the home grid
+#   layout      — visual | text | mixed  (controls the project detail page layout)
 #   year        — displayed in project metadata
 
 - title: "QParcel"
   category: "Brand & Web"
   description: "End-to-end rebrand and marketing site for a fast-growing parcel delivery startup."
   cover: "https://picsum.photos/seed/qparcel/1200/800"
+  icon: ""
   url: "/work/brand-identity/"
   layout: "visual"
-  featured: true
   year: "2024"
 
 - title: "Terrain Studio"
   category: "Web App"
   description: "A collaborative design tool for landscape architects built with real-time multiplayer editing."
   cover: "https://picsum.photos/seed/terrain/1200/800"
+  icon: ""
   url: "/work/product-landing/"
   layout: "mixed"
-  featured: false
   year: "2024"
 
 - title: "Type Specimen"
   category: "Editorial"
   description: "An interactive type specimen exploring variable fonts and their expressive range."
   cover: ""
+  icon: "type"
   url: "/work/type-specimen/"
   layout: "text"
-  featured: false
   year: "2023"
 
 - title: "Luminary Magazine"
   category: "Art Direction"
   description: "Art direction and layout system for an independent design and culture publication."
   cover: "https://picsum.photos/seed/luminary/1200/800"
+  icon: ""
   url: "/work/editorial-magazine/"
   layout: "mixed"
-  featured: false
   year: "2023"

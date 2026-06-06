@@ -79,6 +79,7 @@
   background: var(--bg-tertiary);
   cursor: pointer;
   grid-column: span 1;
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
 
   // Image fills the card
   &__img {
@@ -91,7 +92,7 @@
     will-change: transform;
   }
 
-  // Gradient overlay — always present so text is readable
+  // Gradient overlay — always present so white text reads on images
   &::after {
     content: '';
     position: absolute;
@@ -152,35 +153,73 @@
     overflow: hidden;
   }
 
-  // Hover — lift + image zoom
+  // Hover — lift card + zoom image
   &:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
     .project-card__img { transform: scale(1.04); }
-    &::after { opacity: 0.9; }
+    &::after { opacity: 0.85; }
   }
 
-  // No-image cards — use a rich dark bg + colored text
-  &--no-image {
-    background: var(--bg-secondary);
-    border: 1.5px solid var(--border);
-
-    &::after { display: none; }
-
-    .project-card__category {
-      color: var(--accent);
-      background: var(--accent-10);
-      border-color: transparent;
-    }
-    .project-card__title { color: var(--text); }
-    .project-card__desc  { color: var(--text-muted); }
-
-    // Shift text to center of card
-    .project-card__body {
-      inset: 0;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-    }
+  // ── Icon (Lucide) for no-cover cards ──────────
+  &__icon-wrap {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: var(--space-16); // leave room for the text block below
+    z-index: 1;
   }
+
+  &__icon-glow {
+    position: absolute;
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    background: radial-gradient(circle, var(--accent) 0%, transparent 70%);
+    opacity: 0.18;
+    filter: blur(24px);
+    pointer-events: none;
+  }
+
+  &__icon {
+    width: 44px;
+    height: 44px;
+    color: var(--accent);
+    stroke-width: 1.25;
+    position: relative;
+    z-index: 1;
+    transition: transform var(--transition-base);
+  }
+
+  &:hover &__icon {
+    transform: scale(1.1);
+  }
+}
+
+// ─────────────────────────────────────────────
+// NO-IMAGE CARDS — theme-aware colors, no overlay
+// ─────────────────────────────────────────────
+.project-card--no-image {
+  background: var(--bg-secondary);
+  border: 1.5px solid var(--border);
+
+  // No gradient overlay needed
+  &::after { display: none; }
+
+  // Category tag: use accent colors, full opacity, no glass blur
+  .project-card__category {
+    color: var(--accent);
+    background: var(--accent-10);
+    border-color: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  // Text uses theme colors instead of forced white
+  .project-card__title { color: var(--text); }
+  .project-card__desc  { color: var(--text-muted); }
 }
 
 // ─────────────────────────────────────────────
@@ -212,7 +251,6 @@
     max-width: 520px;
   }
 
-  // Stronger gradient so large text reads on any image
   &::after {
     background: linear-gradient(
       to bottom,
@@ -221,24 +259,16 @@
       rgba(0, 0, 0, 0.85) 100%
     );
   }
-
-  &.project-card--no-image {
-    .project-card__body {
-      inset: 0;
-      justify-content: flex-end;
-    }
-  }
 }
 
 // ─────────────────────────────────────────────
-// GRID CARDS — remaining projects, asymmetric layout
-// Pairs alternate: 7+5 cols → 5+7 cols → repeat
-// nth-child counts from parent (.work__grid):
+// GRID CARDS — alternating 7+5 / 5+7 columns
+// nth-child counts from .work__grid root:
 //   child 1 = hero
-//   child 2 = 1st grid card  → even → 7 cols
-//   child 3 = 2nd grid card  → odd  → 5 cols  [pair 1: 7+5]
-//   child 4 = 3rd grid card  → even → 5 cols
-//   child 5 = 4th grid card  → odd  → 7 cols  [pair 2: 5+7]  ← wait, let's use 4n
+//   child 2 = 4n+2  → 7 cols   ┐ row 1: 7+5
+//   child 3 = 4n+3  → 5 cols   ┘
+//   child 4 = 4n+4  → 5 cols   ┐ row 2: 5+7
+//   child 5 = 4n+1  → 7 cols   ┘
 // ─────────────────────────────────────────────
 .project-card--grid {
   aspect-ratio: 4 / 3;
@@ -247,25 +277,13 @@
   @media (min-width: 768px) {
     aspect-ratio: auto;
     height: 380px;
-    grid-column: span 6; // default fallback
+    grid-column: span 6; // fallback
   }
 
-  // Alternating asymmetric columns (desktop only)
-  // Pattern: 7, 5, 5, 7, 7, 5, 5, 7...
-  // children 2,6,10... and 5,9,13... → 7 cols
-  // children 3,7,11... and 4,8,12... → 5 cols
   @media (min-width: 768px) {
     &:nth-child(4n+2) { grid-column: span 7; }
     &:nth-child(4n+3) { grid-column: span 5; }
     &:nth-child(4n+4) { grid-column: span 5; }
-    &:nth-child(4n+1) { grid-column: span 7; } // positions 5,9,13... (hero is pos 1 but has --hero class)
-  }
-
-  // Slightly taller for the wider 7-col cards
-  @media (min-width: 768px) {
-    &:nth-child(4n+2),
-    &:nth-child(4n+1) {
-      height: 400px;
-    }
+    &:nth-child(4n+1) { grid-column: span 7; }
   }
 }
