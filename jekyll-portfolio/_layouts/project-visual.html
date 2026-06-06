@@ -11,7 +11,6 @@ layout: default
       <div class="container container--project">
         <span class="project__category tag">{{ page.category }}</span>
         <h1 class="project-visual__title">{{ page.title }}</h1>
-        {% if page.year %}<span class="project-visual__year">{{ page.year }}</span>{% endif %}
       </div>
     </div>
   </div>
@@ -22,8 +21,12 @@ layout: default
       {% if page.client %}<div class="project__meta-item"><span class="project__meta-label">Client</span><span>{{ page.client }}</span></div>{% endif %}
       {% if page.role %}<div class="project__meta-item"><span class="project__meta-label">Role</span><span>{{ page.role }}</span></div>{% endif %}
       {% if page.year %}<div class="project__meta-item"><span class="project__meta-label">Year</span><span>{{ page.year }}</span></div>{% endif %}
-      {% if page.link %}<div class="project__meta-item"><a href="{{ page.link }}" target="_blank" rel="noopener" class="project__meta-link">Visit project →</a></div>{% endif %}
+      {% if page.link %}<a href="{{ page.link }}" target="_blank" rel="noopener" class="btn btn--pill btn--sm">Visit project →</a>{% endif %}
     </div>
+
+    {% if page.tagline %}
+    <p class="project-visual__tagline">{{ page.tagline }}</p>
+    {% endif %}
 
     <div class="prose">
       {{ content }}
