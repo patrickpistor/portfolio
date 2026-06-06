@@ -81,6 +81,18 @@ social_links:
     icon: "dribbble"
 
 # ─────────────────────────────────────────────
+# SUBSTACK (optional)
+# ─────────────────────────────────────────────
+# Set your Substack username to enable Substack integration.
+# The /blog/ page will show your Substack subscribe widget and a
+# link to your publication instead of the built-in Jekyll post list.
+# The footer newsletter form will also submit directly to Substack.
+# Leave username blank to use the built-in Jekyll blog instead.
+substack:
+  username: ""           # e.g. "yourname"  →  yourname.substack.com
+  nav_label: "Writing"   # Label shown in nav and page heading
+
+# ─────────────────────────────────────────────
 # JEKYLL SETTINGS
 # ─────────────────────────────────────────────
 markdown: kramdown

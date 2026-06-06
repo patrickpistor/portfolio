@@ -19,8 +19,10 @@ columns:
 
   - heading: "Writing"
     links:
-      - label: "Blog"
+      - label: "Writing"
         url: "/blog/"
+      - label: "Substack"
+        url: "https://yourusername.substack.com"
       - label: "RSS Feed"
         url: "/feed.xml"
 

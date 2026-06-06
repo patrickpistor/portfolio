@@ -7,54 +7,98 @@
         <p class="footer__newsletter-heading">{{ site.data.footer.newsletter.heading }}</p>
         <p class="footer__newsletter-desc">{{ site.data.footer.newsletter.description }}</p>
 
+        {% if site.substack.username and site.substack.username != "" %}
+        <!-- Substack inline subscribe -->
+        {% assign ss_url = "https://" | append: site.substack.username | append: ".substack.com" %}
+        <form class="footer__signup-form" id="substackForm" novalidate>
+          {% assign nl = site.data.footer.newsletter %}
+          {% if nl.field_label and nl.field_label != "" %}
+          <label class="footer__signup-label" for="footer-email">{{ nl.field_label }}</label>
+          {% endif %}
+          <div class="footer__signup-row">
+            <input
+              id="footer-email"
+              class="footer__signup-input"
+              type="email"
+              name="email"
+              placeholder="{{ nl.field_placeholder | default: 'you@example.com' }}"
+              required
+              aria-label="{{ nl.field_label | default: 'Email address' }}"
+            >
+            <button type="submit" class="btn btn--pill btn--accent footer__signup-btn">
+              {{ nl.submit_label | default: 'Subscribe' }}
+            </button>
+          </div>
+          <p class="footer__signup-note" id="substackMsg" hidden></p>
+        </form>
+        <script>
+          (function() {
+            var form = document.getElementById('substackForm');
+            var msg  = document.getElementById('substackMsg');
+            if (!form) return;
+            form.addEventListener('submit', function(e) {
+              e.preventDefault();
+              var email = form.querySelector('input[type=email]').value.trim();
+              if (!email) return;
+              fetch('{{ ss_url }}/api/v1/free', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email: email })
+              })
+              .then(function(r) {
+                msg.hidden = false;
+                if (r.ok) {
+                  msg.textContent = 'Check your inbox to confirm your subscription!';
+                  msg.style.color = 'var(--accent)';
+                  form.querySelector('input').value = '';
+                } else {
+                  msg.textContent = 'Something went wrong — try subscribing directly on Substack.';
+                  msg.style.color = 'var(--text-muted)';
+                }
+              })
+              .catch(function() {
+                msg.hidden = false;
+                msg.textContent = 'Could not connect — ';
+                msg.style.color = 'var(--text-muted)';
+                var link = document.createElement('a');
+                link.href = '{{ ss_url }}';
+                link.target = '_blank';
+                link.textContent = 'subscribe on Substack';
+                msg.appendChild(link);
+              });
+            });
+          })();
+        </script>
+
+        {% else %}
+
         {% assign nl = site.data.footer.newsletter %}
         {% if nl.field_label != "" or nl.field_placeholder != "" %}
           {% if nl.form_action != "" and nl.form_action %}
-          <!-- Formspree / external form endpoint -->
-          <form
-            class="footer__signup-form"
-            action="{{ nl.form_action }}"
-            method="POST"
-            novalidate
-          >
+          <form class="footer__signup-form" action="{{ nl.form_action }}" method="POST" novalidate>
             {% if nl.field_label != "" %}
             <label class="footer__signup-label" for="footer-email">{{ nl.field_label }}</label>
             {% endif %}
             <div class="footer__signup-row">
-              <input
-                id="footer-email"
-                class="footer__signup-input"
-                type="email"
-                name="email"
-                placeholder="{{ nl.field_placeholder }}"
-                required
-                aria-label="{{ nl.field_label | default: 'Email address' }}"
-              >
+              <input id="footer-email" class="footer__signup-input" type="email" name="email"
+                placeholder="{{ nl.field_placeholder }}" required
+                aria-label="{{ nl.field_label | default: 'Email address' }}">
               <button type="submit" class="btn btn--pill btn--accent footer__signup-btn">
                 {{ nl.submit_label | default: 'Subscribe' }}
               </button>
             </div>
           </form>
           {% else %}
-          <!-- mailto: fallback — clicking submit opens the user's email client -->
-          <form
-            class="footer__signup-form"
+          <form class="footer__signup-form"
             onsubmit="var e=this.querySelector('input[type=email]').value;window.location='mailto:{{ nl.form_mailto }}?subject=Newsletter+signup&body='+encodeURIComponent(e);return false;"
-            novalidate
-          >
+            novalidate>
             {% if nl.field_label != "" %}
             <label class="footer__signup-label" for="footer-email">{{ nl.field_label }}</label>
             {% endif %}
             <div class="footer__signup-row">
-              <input
-                id="footer-email"
-                class="footer__signup-input"
-                type="email"
-                name="email"
-                placeholder="{{ nl.field_placeholder }}"
-                required
-                aria-label="{{ nl.field_label | default: 'Email address' }}"
-              >
+              <input id="footer-email" class="footer__signup-input" type="email" name="email"
+                placeholder="{{ nl.field_placeholder }}" required
+                aria-label="{{ nl.field_label | default: 'Email address' }}">
               <button type="submit" class="btn btn--pill btn--accent footer__signup-btn">
                 {{ nl.submit_label | default: 'Subscribe' }}
               </button>
@@ -62,10 +106,11 @@
           </form>
           {% endif %}
         {% else %}
-        <!-- No field — just a CTA button -->
         <a href="mailto:{{ nl.form_mailto }}" class="btn btn--pill">
           {{ nl.submit_label | default: 'Get in touch' }}
         </a>
+        {% endif %}
+
         {% endif %}
       </div>
       {% endif %}
