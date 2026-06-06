@@ -4,13 +4,13 @@ layout: default
 <article class="project project--mixed">
   {% if page.cover %}
   <div class="project-mixed__cover">
-    <div class="container">
+    <div class="container container--project">
       <img src="{{ page.cover | relative_url }}" alt="{{ page.title }}" loading="eager">
     </div>
   </div>
   {% endif %}
 
-  <div class="container">
+  <div class="container container--project">
     <header class="project-mixed__header">
       <a href="{{ '/#work' | relative_url }}" class="project__back">← All work</a>
       <span class="tag">{{ page.category }}</span>

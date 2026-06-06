@@ -8,7 +8,7 @@ layout: default
     <img src="{{ page.cover | relative_url }}" alt="{{ page.title }}" class="project-visual__hero-img" loading="eager">
     {% endif %}
     <div class="project-visual__hero-overlay">
-      <div class="container">
+      <div class="container container--project">
         <span class="project__category tag">{{ page.category }}</span>
         <h1 class="project-visual__title">{{ page.title }}</h1>
         {% if page.year %}<span class="project-visual__year">{{ page.year }}</span>{% endif %}
@@ -16,7 +16,7 @@ layout: default
     </div>
   </div>
 
-  <div class="container">
+  <div class="container container--project">
     <!-- Project meta -->
     <div class="project__meta-bar">
       {% if page.client %}<div class="project__meta-item"><span class="project__meta-label">Client</span><span>{{ page.client }}</span></div>{% endif %}
