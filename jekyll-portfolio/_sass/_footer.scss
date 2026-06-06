@@ -1,5 +1,6 @@
 .site-footer {
   background: var(--bg-secondary);
+  border-top: 1px solid var(--border);
   padding: var(--space-4) 0;
   margin-top: var(--space-4);
 }
@@ -106,8 +107,6 @@
 }
 
 .footer__bottom {
-  padding-top: var(--space-6);
-  border-top: 1px solid var(--border);
   display: flex;
   justify-content: space-between;
   align-items: center;
