@@ -1,1 +1,0 @@
-- [Artifact workflow health check deadlock](artifact-health-check-deadlock.md) — restart_workflow always fails DIDNT_OPEN_A_PORT for artifact-backed workflows; server works, proxy is the issue.
