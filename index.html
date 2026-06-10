@@ -9,7 +9,8 @@ title: Home
     <h1 class="hero__greeting">{{ site.hero_greeting }}</h1>
     <p class="hero__intro">{{ site.hero_intro }}</p>
     {% if site.hero_cta_label %}
-    <a href="{{ site.hero_cta_url | default: '#work' | relative_url }}" class="hero__cta">
+    {% assign cta_url = site.hero_cta_url | default: '/work/' %}
+    <a href="{{ cta_url | relative_url }}" class="hero__cta"{% if cta_url contains '.pdf' or cta_url contains 'http' %} target="_blank" rel="noopener"{% endif %}>
       {{ site.hero_cta_label }}
       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
     </a>
@@ -17,25 +18,24 @@ title: Home
   </div>
 </section>
 
-<!-- WORK GRID -->
-<section class="work" id="work">
+<!-- RECENT WORK -->
+<section class="home-section" id="work">
   <div class="container">
-    <p class="work__heading">Selected Work</p>
-    <div class="work__grid">
-      {% for project in site.data.projects %}
+    <div class="home-section__header">
+      <p class="home-section__heading">Recent Work</p>
+      <a href="{{ '/work/' | relative_url }}" class="home-section__link">View all →</a>
+    </div>
+
+    <div class="work-strip">
+      {% for project in site.data.projects limit: 3 %}
       {% assign has_cover = false %}
       {% if project.cover and project.cover != '' %}{% assign has_cover = true %}{% endif %}
       <a
         href="{{ project.url | relative_url }}"
-        class="project-card{% if forloop.first %} project-card--hero{% else %} project-card--grid{% endif %}{% unless has_cover %} project-card--no-image{% endunless %}"
+        class="project-card project-card--strip{% unless has_cover %} project-card--no-image{% endunless %}"
       >
         {% if has_cover %}
-        <img
-          src="{{ project.cover }}"
-          alt="{{ project.title }}"
-          class="project-card__img"
-          loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
-        >
+        <img src="{{ project.cover }}" alt="{{ project.title }}" class="project-card__img" loading="lazy">
         {% elsif project.icon and project.icon != '' %}
         <div class="project-card__icon-wrap">
           <div class="project-card__icon-glow"></div>
@@ -52,6 +52,53 @@ title: Home
         </div>
       </a>
       {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- RECENT WRITING -->
+{% if site.posts.size > 0 %}
+<section class="home-section">
+  <div class="container">
+    <div class="home-section__header">
+      <p class="home-section__heading">Recent Writing</p>
+      <a href="{{ '/writing/' | relative_url }}" class="home-section__link">All posts →</a>
+    </div>
+
+    <ul class="post-list" role="list">
+      {% for post in site.posts limit: 3 %}
+      <li class="post-list__item">
+        <a href="{{ post.url | relative_url }}" class="post-list__item-link">
+          {% if post.tags.size > 0 %}
+          <div class="post-list__item-tags">
+            {% for tag in post.tags %}<span class="tag">{{ tag }}</span>{% endfor %}
+          </div>
+          {% endif %}
+          <h2 class="post-list__item-title">{{ post.title }}</h2>
+          <p class="post-list__item-excerpt">{{ post.description | default: post.excerpt | strip_html | strip_newlines | truncate: 160 }}</p>
+        </a>
+        <span class="post-list__item-meta">
+          <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%b %-d, %Y" }}</time>
+        </span>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+</section>
+{% endif %}
+
+<!-- ABOUT TEASER -->
+<section class="home-section home-about">
+  <div class="container">
+    <div class="home-about__inner">
+      {% if site.avatar and site.avatar != "" %}
+      <img src="{{ site.avatar | relative_url }}" alt="{{ site.title }}" class="home-about__avatar" loading="lazy">
+      {% endif %}
+      <div class="home-about__text">
+        <p class="home-section__heading">About</p>
+        <p class="home-about__bio">{{ site.about_bio | markdownify | strip_html | strip_newlines | truncate: 240 }}</p>
+        <a href="{{ '/about/' | relative_url }}" class="home-section__link">More about me →</a>
+      </div>
     </div>
   </div>
 </section>

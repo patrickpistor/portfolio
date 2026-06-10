@@ -1,0 +1,50 @@
+---
+layout: default
+title: Work
+permalink: /work/
+---
+
+<section class="work work--page" id="work">
+  <div class="container">
+    <header class="work__header">
+      <h1 class="work__title">Work</h1>
+      <p class="work__subtitle">Selected projects from the last few years.</p>
+    </header>
+
+    <div class="work__grid">
+      {% for project in site.data.projects %}
+      {% assign has_cover = false %}
+      {% if project.cover and project.cover != '' %}{% assign has_cover = true %}{% endif %}
+      <a
+        href="{{ project.url | relative_url }}"
+        class="project-card{% if forloop.first %} project-card--hero{% else %} project-card--grid{% endif %}{% unless has_cover %} project-card--no-image{% endunless %}"
+      >
+        {% if has_cover %}
+        <img
+          src="{{ project.cover }}"
+          alt="{{ project.title }}"
+          class="project-card__img"
+          loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
+        >
+        {% elsif project.icon and project.icon != '' %}
+        <div class="project-card__icon-wrap">
+          <div class="project-card__icon-glow"></div>
+          <i data-lucide="{{ project.icon }}" class="project-card__icon"></i>
+        </div>
+        {% endif %}
+
+        <div class="project-card__body">
+          <span class="project-card__category">{{ project.category }}</span>
+          <div class="project-card__text">
+            <h2 class="project-card__title">{{ project.title }}</h2>
+            <p class="project-card__desc">{{ project.description }}</p>
+          </div>
+        </div>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+<script>lucide.createIcons();</script>

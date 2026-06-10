@@ -15,16 +15,16 @@ columns:
   - heading: "Work"
     links:
       - label: "Selected Projects"
-        url: "/#work"
+        url: "/work/"
       - label: "Case Studies"
-        url: "/#work"
+        url: "/work/"
       - label: "Open Source"
         url: "https://github.com/yourusername"
 
   - heading: "Writing"
     links:
       - label: "Writing"
-        url: "/blog/"
+        url: "/writing/"
       - label: "Substack"
         url: "https://yourusername.substack.com"
       - label: "RSS Feed"

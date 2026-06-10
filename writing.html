@@ -1,0 +1,133 @@
+---
+layout: default
+title: Writing
+permalink: /writing/
+---
+
+<section class="blog-index">
+  <div class="container">
+    <header class="blog-index__header">
+      <h1 class="blog-index__title">Writing</h1>
+      <span class="blog-index__count" id="postCount">{{ site.posts.size }} post{% if site.posts.size != 1 %}s{% endif %}</span>
+    </header>
+
+    <div class="blog-toolbar">
+      <div class="blog-toolbar__search">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+        <input type="search" id="postSearch" class="blog-toolbar__input" placeholder="Search posts…" aria-label="Search posts">
+      </div>
+      <button class="blog-toolbar__sort" id="sortToggle" data-order="newest" aria-label="Toggle sort order">
+        <span id="sortLabel">Newest first</span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 16 4 4 4-4"/><path d="M7 20V4"/><path d="m21 8-4-4-4 4"/><path d="M17 4v16"/></svg>
+      </button>
+    </div>
+
+    {% if site.tags.size > 0 %}
+    <div class="tag-filter" id="tagFilter">
+      <button class="tag-filter__btn tag-filter__btn--active" data-tag="">All</button>
+      {% assign sorted_tags = site.tags | sort %}
+      {% for tag in sorted_tags %}
+      <button class="tag-filter__btn" data-tag="{{ tag[0] }}">{{ tag[0] }}</button>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    <ul class="post-list" id="postList" role="list">
+      {% for post in site.posts %}
+      {% assign excerpt = post.description | default: post.excerpt | strip_html | strip_newlines | truncate: 180 %}
+      <li
+        class="post-list__item"
+        data-title="{{ post.title | downcase | escape }}"
+        data-tags="{{ post.tags | join: ',' | downcase }}"
+        data-excerpt="{{ excerpt | downcase | escape }}"
+        data-date="{{ post.date | date: '%s' }}"
+      >
+        <a href="{{ post.url | relative_url }}" class="post-list__item-link">
+          {% if post.tags.size > 0 %}
+          <div class="post-list__item-tags">
+            {% for tag in post.tags %}<span class="tag">{{ tag }}</span>{% endfor %}
+          </div>
+          {% endif %}
+          <h2 class="post-list__item-title">{{ post.title }}</h2>
+          <p class="post-list__item-excerpt">{{ excerpt }}</p>
+        </a>
+        <span class="post-list__item-meta">
+          <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%b %-d, %Y" }}</time>
+        </span>
+      </li>
+      {% endfor %}
+    </ul>
+
+    <p class="blog-index__empty" id="emptyState" hidden>No posts match. Try a different search or tag.</p>
+  </div>
+</section>
+
+<script>
+  (function() {
+    var list = document.getElementById('postList');
+    var items = Array.prototype.slice.call(list.querySelectorAll('.post-list__item'));
+    var searchInput = document.getElementById('postSearch');
+    var sortToggle = document.getElementById('sortToggle');
+    var sortLabel = document.getElementById('sortLabel');
+    var tagFilter = document.getElementById('tagFilter');
+    var countEl = document.getElementById('postCount');
+    var emptyEl = document.getElementById('emptyState');
+
+    var state = { query: '', tag: '', order: 'newest' };
+
+    function apply() {
+      var visible = 0;
+
+      items.forEach(function(item) {
+        var matchesQuery = true;
+        if (state.query) {
+          var haystack = item.dataset.title + ' ' + item.dataset.excerpt + ' ' + item.dataset.tags;
+          matchesQuery = haystack.indexOf(state.query) !== -1;
+        }
+
+        var matchesTag = true;
+        if (state.tag) {
+          var tags = item.dataset.tags ? item.dataset.tags.split(',') : [];
+          matchesTag = tags.indexOf(state.tag) !== -1;
+        }
+
+        var show = matchesQuery && matchesTag;
+        item.hidden = !show;
+        if (show) visible++;
+      });
+
+      var sorted = items.slice().sort(function(a, b) {
+        var diff = Number(a.dataset.date) - Number(b.dataset.date);
+        return state.order === 'newest' ? -diff : diff;
+      });
+      sorted.forEach(function(item) { list.appendChild(item); });
+
+      countEl.textContent = visible + (visible === 1 ? ' post' : ' posts');
+      emptyEl.hidden = visible !== 0;
+    }
+
+    searchInput.addEventListener('input', function() {
+      state.query = searchInput.value.trim().toLowerCase();
+      apply();
+    });
+
+    sortToggle.addEventListener('click', function() {
+      state.order = state.order === 'newest' ? 'oldest' : 'newest';
+      sortToggle.dataset.order = state.order;
+      sortLabel.textContent = state.order === 'newest' ? 'Newest first' : 'Oldest first';
+      apply();
+    });
+
+    if (tagFilter) {
+      tagFilter.addEventListener('click', function(e) {
+        var btn = e.target.closest('.tag-filter__btn');
+        if (!btn) return;
+        state.tag = btn.dataset.tag.toLowerCase();
+        tagFilter.querySelectorAll('.tag-filter__btn').forEach(function(b) {
+          b.classList.toggle('tag-filter__btn--active', b === btn);
+        });
+        apply();
+      });
+    }
+  })();
+</script>

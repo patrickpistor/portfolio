@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Add your site to Examples
+    url: https://github.com/patrickpistor/Portfolio-Starter-Kit/blob/main/README.md#examples
+    about: Built a portfolio with this template? Open a PR to add it to the README Examples section.

@@ -26,16 +26,20 @@ font_pairing: "modern"
 # Logo / avatar (optional)
 # Path relative to the site root. Leave blank to show your name as text.
 logo: ""
-avatar: "/assets/images/avatar.jpg"
+avatar: "/assets/images/avatar.png"
+
+# Favicon (optional) — path to an .ico/.png/.svg file.
+# Leave blank to auto-generate one from your accent color and the first letter of your title.
+favicon: ""
 
 # ─────────────────────────────────────────────
 # NAVIGATION
 # ─────────────────────────────────────────────
 nav_links:
   - label: "Work"
-    url: "/#work"
+    url: "/work/"
   - label: "Writing"
-    url: "https://substack.com"   # replace with your Substack URL, e.g. https://yourname.substack.com
+    url: "/writing/"
   - label: "About"
     url: "/about/"
   - label: "Resume"
@@ -49,8 +53,8 @@ contact_url: "mailto:hello@yoursite.com"
 # ─────────────────────────────────────────────
 hero_greeting: "Hi there!"
 hero_intro: "I'm a designer & developer crafting thoughtful digital experiences. Currently open to new opportunities."
-hero_cta_label: "View my work"
-hero_cta_url: "/#work"
+hero_cta_label: "View my Resume"
+hero_cta_url: "/assets/resume.pdf"
 
 # ─────────────────────────────────────────────
 # ABOUT PAGE
@@ -70,7 +74,7 @@ skills:
 
 # Social links — shown as icons in the footer.
 # Add, remove, or reorder entries freely.
-# Available icons: github, x, linkedin, dribbble, instagram, behance, codepen, youtube
+# Available icons: github, x, linkedin, dribbble, instagram, behance, codepen, youtube, substack
 # To add a new one, just add an entry with the matching icon name and your URL.
 social_links:
   - label: "GitHub"
@@ -97,15 +101,9 @@ social_links:
   # - label: "YouTube"
   #   url: "https://youtube.com/@yourusername"
   #   icon: "youtube"
-
-# ─────────────────────────────────────────────
-# SUBSTACK (optional)
-# ─────────────────────────────────────────────
-# Set your Substack username to add a nav link pointing to your publication.
-# You can also just set a direct URL in nav_links above instead.
-substack:
-  username: ""           # e.g. "yourname"  →  yourname.substack.com
-  nav_label: "Writing"   # Label shown in the nav link
+  # - label: "Substack"
+  #   url: "https://yourname.substack.com"
+  #   icon: "substack"
 
 # ─────────────────────────────────────────────
 # JEKYLL SETTINGS
@@ -134,7 +132,7 @@ defaults:
     values:
       layout: "project-mixed"
 
-permalink: /blog/:year/:month/:day/:title/
+permalink: /writing/:year/:month/:day/:title/
 
 plugins:
   - jekyll-feed
@@ -149,3 +147,5 @@ exclude:
   - .bundle
   - .sass-cache
   - README.md
+  - CONTRIBUTING.md
+  - docs

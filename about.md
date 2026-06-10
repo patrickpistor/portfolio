@@ -45,7 +45,7 @@ permalink: /about/
       </div>
 
       <!-- Avatar -->
-      {% if site.avatar %}
+      {% if site.avatar and site.avatar != "" %}
       <div class="about__avatar">
         <img src="{{ site.avatar | relative_url }}" alt="{{ site.title }}">
       </div>

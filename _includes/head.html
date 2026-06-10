@@ -8,6 +8,14 @@
 {% seo %}
 {% feed_meta %}
 
+<!-- Favicon — set `favicon` in _config.yml to use your own file; otherwise one is generated from your accent color and first initial -->
+{% if site.favicon and site.favicon != "" %}
+<link rel="icon" href="{{ site.favicon | relative_url }}">
+{% else %}
+{% capture favicon_svg %}<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="{{ site.accent_color | default: '#0052FF' }}"/><text x="32" y="44" font-family="system-ui,sans-serif" font-size="36" font-weight="700" fill="#fff" text-anchor="middle">{{ site.title | slice: 0 | upcase }}</text></svg>{% endcapture %}
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,{{ favicon_svg | url_encode | replace: '+', '%20' }}">
+{% endif %}
+
 <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
 
 <!-- Inline accent color from _config.yml so CSS custom property is available immediately -->
