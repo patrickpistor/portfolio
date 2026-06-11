@@ -16,7 +16,7 @@ A minimal, customizable portfolio template built with Jekyll. Fork it, fill in y
 
 | Homepage | Projects | Writing |
 |---|---|---|
-| ![Homepage walkthrough](docs/homepage-walkthrough.png) | ![Projects walkthrough](docs/projects-walkthrough.png) | ![Writing walkthrough](docs/writing-walkthrough.png) |
+| ![Homepage walkthrough](docs/homepage-walkthrough.gif) | ![Projects walkthrough](docs/projects-walkthrough.gif) | ![Writing walkthrough](docs/writing-walkthrough.gif) |
 
 | Project layout — alternating sections | Project layout — gallery |
 |---|---|
