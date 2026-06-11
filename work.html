@@ -11,6 +11,7 @@ permalink: /work/
       <p class="work__subtitle">Selected projects from the last few years.</p>
     </header>
 
+    {% if site.data.projects and site.data.projects.size > 0 %}
     <div class="work__grid">
       {% for project in site.data.projects %}
       {% assign has_cover = false %}
@@ -43,6 +44,9 @@ permalink: /work/
       </a>
       {% endfor %}
     </div>
+    {% else %}
+    {% include empty-state.html icon="projects" title="Projects coming soon" message="I'm putting together case studies for the work I'm most proud of. They'll show up here soon." cta_label="Get in touch" cta_url="/about/" %}
+    {% endif %}
   </div>
 </section>
 

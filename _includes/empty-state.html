@@ -1,0 +1,24 @@
+{% comment %}
+  Reusable empty state.
+  Params:
+    icon        — one of: projects | writing  (selects an inline SVG; defaults to "projects")
+    title       — bold heading text
+    message     — supporting line below the heading
+    cta_label   — optional button label
+    cta_url     — optional button href (required if cta_label is set)
+{% endcomment %}
+<div class="empty-state">
+  <div class="empty-state__icon-wrap">
+    {% case include.icon %}
+    {% when 'writing' %}
+    <svg class="empty-state__icon" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
+    {% else %}
+    <svg class="empty-state__icon" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2 2 7l10 5 10-5-10-5Z"/><path d="m2 17 10 5 10-5"/><path d="m2 12 10 5 10-5"/></svg>
+    {% endcase %}
+  </div>
+  {% if include.title %}<p class="empty-state__title">{{ include.title }}</p>{% endif %}
+  {% if include.message %}<p class="empty-state__message">{{ include.message }}</p>{% endif %}
+  {% if include.cta_label and include.cta_url %}
+  <a href="{{ include.cta_url | relative_url }}" class="empty-state__cta">{{ include.cta_label }}</a>
+  {% endif %}
+</div>

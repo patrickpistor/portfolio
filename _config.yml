@@ -1,11 +1,11 @@
 # ─────────────────────────────────────────────
 # SITE IDENTITY
 # ─────────────────────────────────────────────
-title: "Your Name"
-tagline: "Designer & Developer"
-description: "I build thoughtful digital products that live at the intersection of design and engineering."
-email: "hello@yoursite.com"
-url: "https://yourusername.github.io"
+title: "Patrick Pistor"
+tagline: "Software Engineer"
+description: "Software engineer based in Bentonville, Arkansas."
+email: "contact@patrickpistor.com"
+url: "https://patrickpistor.com"
 baseurl: ""
 
 # ─────────────────────────────────────────────
@@ -14,7 +14,7 @@ baseurl: ""
 
 # Accent color — used for links, buttons, tags, and highlights.
 # Any valid hex value (include the #).
-accent_color: "#0052FF"
+accent_color: "#f6e251"
 
 # Font pairing — choose one: modern | editorial | mono | classic
 # modern    → Inter (clean, professional)
@@ -25,6 +25,7 @@ font_pairing: "modern"
 
 # Logo / avatar (optional)
 # Path relative to the site root. Leave blank to show your name as text.
+# TODO: add your photo at assets/images/avatar.png
 logo: ""
 avatar: "/assets/images/avatar.png"
 
@@ -42,53 +43,54 @@ nav_links:
     url: "/writing/"
   - label: "About"
     url: "/about/"
+  # Pointing to LinkedIn for now — swap to /assets/resume.pdf once your resume is ready
   - label: "Resume"
-    url: "/assets/resume.pdf"
+    url: "https://www.linkedin.com/in/ppistor/"
 
 contact_label: "Contact"
-contact_url: "mailto:hello@yoursite.com"
+contact_url: "mailto:contact@patrickpistor.com"
 
 # ─────────────────────────────────────────────
 # HOME PAGE
 # ─────────────────────────────────────────────
-hero_greeting: "Hi there!"
-hero_intro: "I'm a designer & developer crafting thoughtful digital experiences. Currently open to new opportunities."
+hero_greeting: "Hi, I'm Patrick."
+# TODO: update this intro with your own words
+hero_intro: "Software engineer based in Bentonville, Arkansas."
+# Pointing to LinkedIn for now — swap to /assets/resume.pdf once your resume is ready
 hero_cta_label: "View my Resume"
-hero_cta_url: "/assets/resume.pdf"
+hero_cta_url: "https://www.linkedin.com/in/ppistor/"
 
 # ─────────────────────────────────────────────
 # ABOUT PAGE
 # ─────────────────────────────────────────────
+# TODO: write your bio here (supports Markdown)
 about_bio: |
-  I'm a designer and developer based in [City]. I've spent the last 5 years building products for startups and established brands — from brand identity systems to full-stack web applications.
+  I'm a software engineer based in Bentonville, Arkansas.
 
-  I care deeply about the craft: clean code, considered typography, and interfaces that feel inevitable. When I'm not at the computer, I'm usually hiking, reading, or making espresso I can't stop thinking about.
-
+# TODO: replace with your actual skills
 skills:
-  - UI/UX Design
-  - Brand Identity
-  - Front-End Development
-  - Motion Design
-  - Design Systems
-  - Typography
+  - Software Engineering
+  - Web Development
 
 # Social links — shown as icons in the footer.
 # Add, remove, or reorder entries freely.
 # Available icons: github, x, linkedin, dribbble, instagram, behance, codepen, youtube, substack
-# To add a new one, just add an entry with the matching icon name and your URL.
 social_links:
   - label: "GitHub"
-    url: "https://github.com/yourusername"
+    url: "https://github.com/patrickpistor"
     icon: "github"
-  - label: "Twitter / X"
-    url: "https://x.com/yourusername"
-    icon: "x"
   - label: "LinkedIn"
-    url: "https://linkedin.com/in/yourusername"
+    url: "https://www.linkedin.com/in/ppistor/"
     icon: "linkedin"
   - label: "Dribbble"
-    url: "https://dribbble.com/yourusername"
+    url: "https://dribbble.com/patrickpistor"
     icon: "dribbble"
+  - label: "Substack"
+    url: "https://patrickpistor.substack.com/"
+    icon: "substack"
+  # - label: "Twitter / X"
+  #   url: "https://x.com/yourusername"
+  #   icon: "x"
   # - label: "CodePen"
   #   url: "https://codepen.io/yourusername"
   #   icon: "codepen"

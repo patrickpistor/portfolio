@@ -89,6 +89,66 @@
 }
 
 // ─────────────────────────────────────────────
+// EMPTY STATE — shared (home, work, writing)
+// ─────────────────────────────────────────────
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--space-3);
+  padding: var(--space-16) var(--space-6);
+  background: var(--bg-secondary);
+  border: 1.5px dashed var(--border);
+  border-radius: var(--radius-lg);
+
+  &__icon-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    margin-bottom: var(--space-1);
+    border-radius: var(--radius-full);
+    color: var(--accent);
+    background: var(--accent-10);
+  }
+
+  &__icon { width: 28px; height: 28px; }
+
+  &__title {
+    font-family: var(--font-heading);
+    font-size: 1.15rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--text);
+  }
+
+  &__message {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+    max-width: 42ch;
+  }
+
+  &__cta {
+    margin-top: var(--space-3);
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: 0.6em 1.4em;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--accent);
+    background: var(--accent-10);
+    border-radius: var(--radius-full);
+    transition: opacity var(--transition-fast), transform var(--transition-fast);
+
+    &:hover { opacity: 0.85; transform: translateY(-1px); }
+  }
+}
+
+// ─────────────────────────────────────────────
 // 404
 // ─────────────────────────────────────────────
 .error-page {

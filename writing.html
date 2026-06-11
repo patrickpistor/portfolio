@@ -11,6 +11,7 @@ permalink: /writing/
       <span class="blog-index__count" id="postCount">{{ site.posts.size }} post{% if site.posts.size != 1 %}s{% endif %}</span>
     </header>
 
+    {% if site.posts.size > 0 %}
     <div class="blog-toolbar">
       <div class="blog-toolbar__search">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
@@ -59,9 +60,13 @@ permalink: /writing/
     </ul>
 
     <p class="blog-index__empty" id="emptyState" hidden>No posts match. Try a different search or tag.</p>
+    {% else %}
+    {% include empty-state.html icon="writing" title="No posts yet" message="I'm working on my first write-up. Notes on what I'm building and learning will land here soon." %}
+    {% endif %}
   </div>
 </section>
 
+{% if site.posts.size > 0 %}
 <script>
   (function() {
     var list = document.getElementById('postList');
@@ -131,3 +136,4 @@ permalink: /writing/
     }
   })();
 </script>
+{% endif %}

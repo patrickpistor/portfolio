@@ -9,37 +9,31 @@
 # Each column has a heading and a list of links.
 # Remove a column by deleting its block.
 
-copyright: "© 2025 Your Name. All rights reserved."
+copyright: "© 2026 Patrick Pistor. All rights reserved."
 
 columns:
   - heading: "Work"
     links:
       - label: "Selected Projects"
         url: "/work/"
-      - label: "Case Studies"
-        url: "/work/"
       - label: "Open Source"
-        url: "https://github.com/yourusername"
+        url: "https://github.com/patrickpistor"
 
   - heading: "Writing"
     links:
       - label: "Writing"
         url: "/writing/"
-      - label: "Substack"
-        url: "https://yourusername.substack.com"
       - label: "RSS Feed"
         url: "/feed.xml"
 
   - heading: "Connect"
     links:
       - label: "Email"
-        url: "mailto:hello@yoursite.com"
+        url: "mailto:contact@patrickpistor.com"
       - label: "GitHub"
-        url: "https://github.com/yourusername"
+        url: "https://github.com/patrickpistor"
       - label: "LinkedIn"
-        url: "https://linkedin.com/in/yourusername"
-      - label: "Twitter / X"
-        url: "https://x.com/yourusername"
+        url: "https://www.linkedin.com/in/ppistor/"
 
 # ─────────────────────────────────────────────
 # NEWSLETTER / EMAIL SIGNUP (optional)
@@ -63,4 +57,4 @@ newsletter:
   # Set to your Formspree form URL, e.g. https://formspree.io/f/xyzabcde
   # Leave blank to use a mailto: fallback
   form_action: ""
-  form_mailto: "hello@yoursite.com"
+  form_mailto: "contact@patrickpistor.com"

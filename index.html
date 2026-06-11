@@ -26,6 +26,7 @@ title: Home
       <a href="{{ '/work/' | relative_url }}" class="home-section__link">View all →</a>
     </div>
 
+    {% if site.data.projects and site.data.projects.size > 0 %}
     <div class="work-strip">
       {% for project in site.data.projects limit: 3 %}
       {% assign has_cover = false %}
@@ -53,18 +54,23 @@ title: Home
       </a>
       {% endfor %}
     </div>
+    {% else %}
+    {% include empty-state.html icon="projects" title="Projects coming soon" message="I'm putting together a few things worth sharing. Check back shortly." %}
+    {% endif %}
   </div>
 </section>
 
 <!-- RECENT WRITING -->
-{% if site.posts.size > 0 %}
 <section class="home-section">
   <div class="container">
     <div class="home-section__header">
       <p class="home-section__heading">Recent Writing</p>
+      {% if site.posts.size > 0 %}
       <a href="{{ '/writing/' | relative_url }}" class="home-section__link">All posts →</a>
+      {% endif %}
     </div>
 
+    {% if site.posts.size > 0 %}
     <ul class="post-list" role="list">
       {% for post in site.posts limit: 3 %}
       <li class="post-list__item">
@@ -83,16 +89,18 @@ title: Home
       </li>
       {% endfor %}
     </ul>
+    {% else %}
+    {% include empty-state.html icon="writing" title="No posts yet" message="I'm working on my first write-up. Notes on what I'm building will land here soon." %}
+    {% endif %}
   </div>
 </section>
-{% endif %}
 
 <!-- ABOUT TEASER -->
 <section class="home-section home-about">
   <div class="container">
     <div class="home-about__inner">
       {% if site.avatar and site.avatar != "" %}
-      <img src="{{ site.avatar | relative_url }}" alt="{{ site.title }}" class="home-about__avatar" loading="lazy">
+      <img src="{{ site.avatar | relative_url }}?v={{ site.time | date: '%s' }}" alt="{{ site.title }}" class="home-about__avatar" loading="lazy">
       {% endif %}
       <div class="home-about__text">
         <p class="home-section__heading">About</p>
